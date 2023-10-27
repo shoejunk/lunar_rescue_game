@@ -1,4 +1,4 @@
-# template
+# lunar_rescue_game
 Generate project files by running:
 - "generate.bat"
 
