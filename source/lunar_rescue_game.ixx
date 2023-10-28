@@ -21,8 +21,10 @@ namespace stk
 	public:
 		c_lunar_rescue_game(uint32_t x, uint32_t y, char const* title)
 			: m_window(sf::VideoMode(x, y), title)
-			, m_input(nullptr)
 		{
+			m_game_input.add(sf::Keyboard::Key::A, "left"_h);
+			m_game_input.add(sf::Keyboard::Key::D, "right"_h);
+			m_game_input.add(sf::Keyboard::Key::S, "rocket"_h);
 		}
 
 		void make_sprite(c_hash id, std::string const& image_path, float x, float y)
@@ -86,9 +88,9 @@ namespace stk
 						m_window.close();
 						return;
 					}
-					else if (m_input != nullptr)
+					else
 					{
-						m_input->on(event);
+						m_game_input.on(event);
 					}
 				}
 
@@ -103,14 +105,12 @@ namespace stk
 			}
 		}
 
-		void set_input(c_input* input) { m_input = input; }
-
 	private:
 		sf::RenderWindow m_window;
 		ds::fixed_vector<sf::Texture, 512> m_textures;
 		ds::fixed_vector<sf::Sprite, 512> m_sprites;
 		unordered_map<c_hash, size_t, s_hash_hasher> m_sprite_map;
 		//GameState m_state;
-		c_input* m_input;
+		c_input m_game_input;
 	};
 }

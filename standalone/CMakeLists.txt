@@ -32,3 +32,4 @@ add_executable(${PROJECT_NAME} ${sources})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23 OUTPUT_NAME "lunar_rescue_game")
 
 target_link_libraries(${PROJECT_NAME} lunar_rescue_game cxxopts)
+file(COPY data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
