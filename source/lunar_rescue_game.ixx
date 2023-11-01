@@ -2,8 +2,9 @@ module;
 
 #include <cassert>
 
-export module stk.lunar_rescue_game;
+export module lunar_rescue.game;
 
+//import lunar_rescue.game_state;
 import std.core;
 import stk.ds;
 import stk.hash;
@@ -16,10 +17,10 @@ using namespace stk;
 
 namespace stk
 {
-	export class c_lunar_rescue_game
+	export class c_game
 	{
 	public:
-		c_lunar_rescue_game(uint32_t x, uint32_t y, char const* title)
+		c_game(uint32_t x, uint32_t y, char const* title)
 			: m_window(sf::VideoMode(x, y), title)
 		{
 			m_game_input.add(sf::Keyboard::Key::A, "left"_h);
@@ -110,7 +111,7 @@ namespace stk
 		ds::fixed_vector<sf::Texture, 512> m_textures;
 		ds::fixed_vector<sf::Sprite, 512> m_sprites;
 		unordered_map<c_hash, size_t, s_hash_hasher> m_sprite_map;
-		//GameState m_state;
+		//c_game_state m_state;
 		c_input m_game_input;
 	};
 }

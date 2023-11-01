@@ -52,6 +52,13 @@ CPMAddPackage(
 	VERSION 1.1.0
 )
 
+# Add package: shoejunk/lunar_rescue_game_state
+#CPMAddPackage(
+#	NAME lunar_rescue_game_state
+#	GITHUB_REPOSITORY shoejunk/lunar-rescue-game-state
+#	VERSION 0.2.0
+#)
+
 # ---- Add source files ----
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.ixx")
 
@@ -65,7 +72,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23)
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive-;/experimental:module>")
 
-target_link_libraries(${PROJECT_NAME} ds input log)
+#target_link_libraries(${PROJECT_NAME} ds hash input log lunar_rescue_game_state)
+target_link_libraries(${PROJECT_NAME} ds hash input log)
 
 target_include_directories(
   ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
