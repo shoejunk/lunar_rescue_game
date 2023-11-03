@@ -4,7 +4,7 @@ module;
 
 export module lunar_rescue.game;
 
-//import lunar_rescue.game_state;
+import lunar_rescue.game_state;
 import std.core;
 import stk.ds;
 import stk.hash;
@@ -12,6 +12,7 @@ import stk.input;
 import stk.log;
 import <SFML/Graphics.hpp>;
 
+using namespace lunar_rescue;
 using namespace std;
 using namespace stk;
 
@@ -95,7 +96,7 @@ namespace stk
 					}
 				}
 
-				//m_state.update();
+				m_state.update(m_game_input);
 
 				m_window.clear(sf::Color::Black);
 				for (auto& sprite : m_sprites)
@@ -111,7 +112,7 @@ namespace stk
 		ds::fixed_vector<sf::Texture, 512> m_textures;
 		ds::fixed_vector<sf::Sprite, 512> m_sprites;
 		unordered_map<c_hash, size_t, s_hash_hasher> m_sprite_map;
-		//c_game_state m_state;
+		c_game_state m_state;
 		c_input m_game_input;
 	};
 }

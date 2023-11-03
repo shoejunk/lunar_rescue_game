@@ -35,14 +35,14 @@ CPMAddPackage(
 CPMAddPackage(
 	NAME hash
 	GITHUB_REPOSITORY shoejunk/hash
-	VERSION 6.0.0
+	VERSION 6.0.1
 )
 
 # Add package: shoejunk/input
 CPMAddPackage(
 	NAME input
 	GITHUB_REPOSITORY shoejunk/input
-	VERSION 1.1.0
+	VERSION 1.1.1
 )
 
 # Add package: shoejunk/log
@@ -53,11 +53,11 @@ CPMAddPackage(
 )
 
 # Add package: shoejunk/lunar_rescue_game_state
-#CPMAddPackage(
-#	NAME lunar_rescue_game_state
-#	GITHUB_REPOSITORY shoejunk/lunar-rescue-game-state
-#	VERSION 0.2.0
-#)
+CPMAddPackage(
+	NAME lunar_rescue_game_state
+	GITHUB_REPOSITORY shoejunk/lunar-rescue-game-state
+	VERSION 0.2.0
+)
 
 # ---- Add source files ----
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.ixx")
@@ -73,7 +73,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23)
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive-;/experimental:module>")
 
 #target_link_libraries(${PROJECT_NAME} ds hash input log lunar_rescue_game_state)
-target_link_libraries(${PROJECT_NAME} ds hash input log)
+target_link_libraries(${PROJECT_NAME} ds hash input log lunar_rescue_game_state)
 
 target_include_directories(
   ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
