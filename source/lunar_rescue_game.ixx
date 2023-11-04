@@ -107,6 +107,11 @@ namespace lunar_rescue
 			}
 		}
 
+		c_game_state const& state() const
+		{
+			return m_state;
+		}
+
 	private:
 		sf::RenderWindow m_window;
 		ds::fixed_vector<sf::Texture, 512> m_textures;

@@ -56,7 +56,7 @@ CPMAddPackage(
 CPMAddPackage(
 	NAME lunar_rescue_game_state
 	GITHUB_REPOSITORY shoejunk/lunar-rescue-game-state
-	VERSION 0.2.0
+	VERSION 0.3.0
 )
 
 # ---- Add source files ----
