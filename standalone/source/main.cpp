@@ -1,7 +1,8 @@
 import lunar_rescue.game;
+import stk.hash;
 
-using namespace stk;
 using namespace lunar_rescue;
+using namespace stk;
 
 int main()
 {

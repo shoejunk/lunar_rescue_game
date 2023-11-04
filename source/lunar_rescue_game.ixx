@@ -16,7 +16,7 @@ using namespace lunar_rescue;
 using namespace std;
 using namespace stk;
 
-namespace stk
+namespace lunar_rescue
 {
 	export class c_game
 	{
