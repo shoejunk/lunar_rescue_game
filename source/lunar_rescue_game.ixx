@@ -97,6 +97,12 @@ namespace lunar_rescue
 				}
 
 				m_state.update(m_game_input);
+				c_rocket const& rocket = m_state.rocket();
+				sf::Sprite* rocket_sprite = get_sprite("rocket"_h);
+				if (rocket_sprite)
+				{
+					rocket_sprite->setPosition(rocket.screen_pos().x(), rocket.screen_pos().y());
+				}
 
 				m_window.clear(sf::Color::Black);
 				for (auto& sprite : m_sprites)

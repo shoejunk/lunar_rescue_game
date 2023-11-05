@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 project(
 	lunar_rescue_game
-	VERSION 0.1.0
+	VERSION 0.2.0
 	LANGUAGES CXX)
 
 # ---- Fetch CPM ----
@@ -56,7 +56,7 @@ CPMAddPackage(
 CPMAddPackage(
 	NAME lunar_rescue_game_state
 	GITHUB_REPOSITORY shoejunk/lunar-rescue-game-state
-	VERSION 0.3.0
+	VERSION 0.5.0
 )
 
 # ---- Add source files ----
