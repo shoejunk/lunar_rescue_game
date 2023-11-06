@@ -5,6 +5,7 @@ module;
 export module lunar_rescue.game;
 
 import lunar_rescue.game_state;
+import lunar_rescue.game_vis;
 import std.core;
 import stk.ds;
 import stk.hash;
@@ -23,6 +24,7 @@ namespace lunar_rescue
 	public:
 		c_game(uint32_t x, uint32_t y, char const* title)
 			: m_window(sf::VideoMode(x, y), title)
+			, m_vis(m_state, m_sprite_map, m_sprites)
 		{
 			m_game_input.add(sf::Keyboard::Key::A, "left"_h);
 			m_game_input.add(sf::Keyboard::Key::D, "right"_h);
@@ -97,12 +99,7 @@ namespace lunar_rescue
 				}
 
 				m_state.update(m_game_input);
-				c_rocket const& rocket = m_state.rocket();
-				sf::Sprite* rocket_sprite = get_sprite("rocket"_h);
-				if (rocket_sprite)
-				{
-					rocket_sprite->setPosition(rocket.screen_pos().x(), rocket.screen_pos().y());
-				}
+				m_vis.update();
 
 				m_window.clear(sf::Color::Black);
 				for (auto& sprite : m_sprites)
@@ -125,5 +122,6 @@ namespace lunar_rescue
 		unordered_map<c_hash, size_t, s_hash_hasher> m_sprite_map;
 		c_game_state m_state;
 		c_input m_game_input;
+		c_game_vis m_vis;
 	};
 }
