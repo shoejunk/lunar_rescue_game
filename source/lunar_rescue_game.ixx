@@ -12,6 +12,7 @@ import stk.hash;
 import stk.input;
 import stk.log;
 import <SFML/Graphics.hpp>;
+import <SFML/System/Clock.hpp>;
 
 using namespace lunar_rescue;
 using namespace std;
@@ -21,10 +22,14 @@ namespace lunar_rescue
 {
 	export class c_game
 	{
+	private:
+		static constexpr sf::Int64 m_frame_time_us = 1000000 / 144;
+
 	public:
 		c_game(uint32_t x, uint32_t y, char const* title)
 			: m_window(sf::VideoMode(x, y), title)
 			, m_vis(m_state, m_sprite_map, m_sprites)
+			, m_update_count(0)
 		{
 			m_game_input.add(sf::Keyboard::Key::A, "left"_h);
 			m_game_input.add(sf::Keyboard::Key::D, "right"_h);
@@ -84,6 +89,7 @@ namespace lunar_rescue
 		{
 			while (m_window.isOpen())
 			{
+				m_time = m_clock.getElapsedTime();
 				sf::Event event;
 				while (m_window.pollEvent(event))
 				{
@@ -107,6 +113,19 @@ namespace lunar_rescue
 					m_window.draw(sprite);
 				}
 				m_window.display();
+
+				sf::Int64 elapsed = m_clock.getElapsedTime().asMicroseconds() - m_time.asMicroseconds();
+				if (elapsed < m_frame_time_us)
+				{
+					sf::sleep(sf::microseconds(m_frame_time_us - elapsed));
+				}
+
+				elapsed = m_clock.getElapsedTime().asMicroseconds() - m_time.asMicroseconds();
+				++m_update_count;
+				if (m_update_count % 100 == 0)
+				{
+					debugln("fps: {}", 1000000 / elapsed);
+				}
 			}
 		}
 
@@ -123,5 +142,8 @@ namespace lunar_rescue
 		c_game_state m_state;
 		c_input m_game_input;
 		c_game_vis m_vis;
+		sf::Clock m_clock;
+		sf::Time m_time;
+		size_t m_update_count;
 	};
 }
