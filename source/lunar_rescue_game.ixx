@@ -87,6 +87,8 @@ namespace lunar_rescue
 
 		void run()
 		{
+			sf::Int64 worst_fps = 999;
+			sf::Int64 best_fps = 0;
 			while (m_window.isOpen())
 			{
 				m_time = m_clock.getElapsedTime();
@@ -121,10 +123,21 @@ namespace lunar_rescue
 				}
 
 				elapsed = m_clock.getElapsedTime().asMicroseconds() - m_time.asMicroseconds();
+				sf::Int64 fps = 1000000 / elapsed;
+				if (fps < worst_fps)
+				{
+					worst_fps = fps;
+				}
+				if (fps > best_fps)
+				{
+					best_fps = fps;
+				}
 				++m_update_count;
 				if (m_update_count % 100 == 0)
 				{
-					debugln("fps: {}", 1000000 / elapsed);
+					debugln("fps: {} - {}", worst_fps, best_fps);
+					worst_fps = 999;
+					best_fps = 0;
 				}
 			}
 		}
