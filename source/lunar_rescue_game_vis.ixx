@@ -32,6 +32,19 @@ namespace lunar_rescue
 				sprite.setPosition(rocket.screen_pos().x(), rocket.screen_pos().y());
 				sprite.setRotation(rocket.rot_rad() * 360.f / (2.f * numbers::pi_v<float>));
 			}
+
+			auto bullets = m_state.bullets();
+			for (auto const& bullet : bullets)
+			{
+				auto it = m_sprite_map.find(bullet.id());
+				if (it != m_sprite_map.end())
+				{
+					sf::Sprite& sprite = m_sprites[it->second];
+					sprite.setOrigin(sf::Vector2f(sprite.getTexture()->getSize()) / 2.f);
+					sprite.setPosition(bullet.screen_pos().x(), bullet.screen_pos().y());
+					sprite.setRotation(bullet.rot_rad() * 360.f / (2.f * numbers::pi_v<float>));
+				}
+			}
 		}
 
 	private:

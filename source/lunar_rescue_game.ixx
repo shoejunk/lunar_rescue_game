@@ -34,40 +34,60 @@ namespace lunar_rescue
 			m_game_input.add(sf::Keyboard::Key::A, "left"_h);
 			m_game_input.add(sf::Keyboard::Key::D, "right"_h);
 			m_game_input.add(sf::Keyboard::Key::S, "rocket"_h);
+			m_game_input.add(sf::Mouse::Button::Left, "fire"_h);
 		}
 
 		void make_sprite(c_hash id, std::string const& image_path, float x, float y)
 		{
 			assert(m_sprite_map.find(id) == m_sprite_map.end());
+			c_hash tex_id = image_path;
 			size_t index = m_sprites.count();
-			try
+			auto tex_itr = m_texture_map.find(tex_id);
+			sf::Texture* tex;
+			if (tex_itr != m_texture_map.end())
 			{
-				m_textures.emplace();
-				sf::Texture& tex = m_textures[m_textures.count() - 1];
-				if (tex.loadFromFile(image_path))
+				tex = &m_textures[m_texture_map[tex_itr->second]];
+				try
 				{
-					try
+					m_sprites.emplace(*tex);
+				}
+				catch (...)
+				{
+					errorln("Failed to create sprite from texture: ", image_path);
+					return;
+				}
+			}
+			else
+			{
+				try
+				{
+					m_textures.emplace();
+					tex = &m_textures[m_textures.count() - 1];
+					if (tex->loadFromFile(image_path))
 					{
-						m_sprites.emplace(tex);
+						try
+						{
+							m_sprites.emplace(*tex);
+						}
+						catch (...)
+						{
+							errorln("Failed to create sprite from texture: ", image_path);
+							m_textures.remove_at_unordered(m_textures.count() - 1);
+							return;
+						}
 					}
-					catch (...)
+					else
 					{
-						errorln("Failed to create sprite from texture: ", image_path);
+						errorln("Failed to load image from file: ", image_path);
 						m_textures.remove_at_unordered(m_textures.count() - 1);
 						return;
 					}
 				}
-				else
+				catch (...)
 				{
-					errorln("Failed to load image from file: ", image_path);
-					m_textures.remove_at_unordered(m_textures.count() - 1);
+					errorln("Failed to load texture: ", image_path);
 					return;
 				}
-			}
-			catch (...)
-			{
-				errorln("Failed to load texture: ", image_path);
-				return;
 			}
 
 			m_sprites[index].setPosition(x, y);
@@ -77,12 +97,13 @@ namespace lunar_rescue
 
 		sf::Sprite* get_sprite(c_hash id)
 		{
-			if (m_sprite_map.find(id) == m_sprite_map.end())
+			auto sprite_itr = m_sprite_map.find(id);
+			if (sprite_itr == m_sprite_map.end())
 			{
 				return nullptr;
 			}
 
-			return &m_sprites[m_sprite_map[id]];
+			return &m_sprites[sprite_itr->second];
 		}
 
 		void run()
@@ -151,6 +172,7 @@ namespace lunar_rescue
 		sf::RenderWindow m_window;
 		ds::fixed_vector<sf::Texture, 512> m_textures;
 		ds::fixed_vector<sf::Sprite, 512> m_sprites;
+		unordered_map<c_hash, size_t, s_hash_hasher> m_texture_map;
 		unordered_map<c_hash, size_t, s_hash_hasher> m_sprite_map;
 		c_game_state m_state;
 		c_input m_game_input;
