@@ -134,11 +134,17 @@ namespace lunar_rescue
 				sf::Sprite* sprite = m_sprites.get(bullet.id());
 				if (sprite == nullptr)
 				{
-					m_sprites.make_sprite(bullet.id(), "data/laser.png", bullet.screen_pos().x(), bullet.screen_pos().y());
+					float x = bullet.screen_pos().x();
+					float y = bullet.screen_pos().y();
+					m_sprites.make_sprite(bullet.id(), "data/laser.png", x, y);
+					sprite = m_sprites.get(bullet.id());
+					if (sprite != nullptr)
+					{
+						sprite->setOrigin(sf::Vector2f(sprite->getTexture()->getSize()) / 2.f);
+					}
 				}
 				else
 				{
-					sprite->setOrigin(sf::Vector2f(sprite->getTexture()->getSize()) / 2.f);
 					sprite->setPosition(bullet.screen_pos().x(), bullet.screen_pos().y());
 				}
 			}
