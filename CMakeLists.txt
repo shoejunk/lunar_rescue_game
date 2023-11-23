@@ -42,7 +42,7 @@ CPMAddPackage(
 CPMAddPackage(
 	NAME input
 	GITHUB_REPOSITORY shoejunk/input
-	VERSION 1.4.0
+	VERSION 1.9.0
 )
 
 # Add package: shoejunk/log
@@ -56,7 +56,7 @@ CPMAddPackage(
 CPMAddPackage(
 	NAME lunar_rescue_game_state
 	GITHUB_REPOSITORY shoejunk/lunar-rescue-game-state
-	VERSION 0.10.0
+	VERSION 0.16.0
 )
 
 # ---- Add source files ----

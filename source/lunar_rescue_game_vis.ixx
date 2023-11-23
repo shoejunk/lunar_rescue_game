@@ -143,10 +143,8 @@ namespace lunar_rescue
 						sprite->setOrigin(sf::Vector2f(sprite->getTexture()->getSize()) / 2.f);
 					}
 				}
-				else
-				{
-					sprite->setPosition(bullet.screen_pos().x(), bullet.screen_pos().y());
-				}
+				sprite->setPosition(bullet.screen_pos().x(), bullet.screen_pos().y());
+				sprite->setRotation(bullet.rot_deg());
 			}
 		}
 
