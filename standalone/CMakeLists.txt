@@ -30,6 +30,13 @@ CPMAddPackage(
 	VERSION 6.0.1
 )
 
+# Add package: shoejunk/collide
+CPMAddPackage(
+	NAME collide
+	GITHUB_REPOSITORY shoejunk/collide
+	VERSION 0.1.1
+)
+
 # ---- Create standalone executable ----
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
@@ -38,5 +45,5 @@ add_executable(${PROJECT_NAME} ${sources})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23 OUTPUT_NAME "lunar_rescue_game")
 
-target_link_libraries(${PROJECT_NAME} lunar_rescue_game cxxopts hash)
+target_link_libraries(${PROJECT_NAME} lunar_rescue_game cxxopts hash collide)
 file(COPY data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

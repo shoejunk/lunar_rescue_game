@@ -1,6 +1,7 @@
 import lunar_rescue.game;
 import std.core;
 import stk.hash;
+import stk.collide;
 
 using namespace lunar_rescue;
 using namespace stk;
@@ -18,6 +19,9 @@ int main()
 	sf::Texture const* rocket_texture = rocket_sprite->getTexture();
 	sf::Color color = rocket_texture->copyToImage().getPixel(70, 64);
 	color = rocket_texture->copyToImage().getPixel(41, 56);
+	auto texture_size = rocket_texture->getSize();
+	c_collision_mask mask(texture_size.x, texture_size.y);
+	mask.from_image(rocket_texture->copyToImage());
 
 	if (sprite != nullptr)
 	{
