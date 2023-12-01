@@ -73,7 +73,6 @@ namespace lunar_rescue
 			}
 
 			m_sprites[index].setPosition(x, y);
-			m_sprites[index].setScale(0.2f, 0.2f);
 			m_sprite_map[id] = index;
 		}
 
