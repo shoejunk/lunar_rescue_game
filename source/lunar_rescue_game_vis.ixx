@@ -5,7 +5,7 @@ import std.core;
 import stk.ds;
 import stk.hash;
 import stk.log;
-import stk.sprite_bank;
+import stk.sprite;
 import <SFML/Graphics.hpp>;
 
 using namespace std;
