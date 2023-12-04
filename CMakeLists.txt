@@ -52,6 +52,13 @@ CPMAddPackage(
 	VERSION 1.3.0
 )
 
+# Add package: shoejunk/sprite
+CPMAddPackage(
+	NAME sprite
+	GITHUB_REPOSITORY shoejunk/sprite
+	VERSION 0.1.0
+)
+
 # Add package: shoejunk/lunar_rescue_game_state
 CPMAddPackage(
 	NAME lunar_rescue_game_state
@@ -73,7 +80,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23)
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive-;/experimental:module>")
 
 #target_link_libraries(${PROJECT_NAME} ds hash input log lunar_rescue_game_state)
-target_link_libraries(${PROJECT_NAME} ds hash input log lunar_rescue_game_state)
+target_link_libraries(${PROJECT_NAME} ds hash input log sprite lunar_rescue_game_state)
 
 target_include_directories(
   ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>

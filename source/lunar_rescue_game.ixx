@@ -11,6 +11,7 @@ import stk.ds;
 import stk.hash;
 import stk.input;
 import stk.log;
+import stk.sprite_bank;
 import <SFML/Graphics.hpp>;
 import <SFML/System/Clock.hpp>;
 
