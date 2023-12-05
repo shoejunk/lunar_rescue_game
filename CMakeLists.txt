@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 project(
 	lunar_rescue_game
-	VERSION 0.3.0
+	VERSION 0.3.1
 	LANGUAGES CXX)
 
 # ---- Fetch CPM ----
@@ -79,7 +79,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23)
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive-;/experimental:module>")
 
-#target_link_libraries(${PROJECT_NAME} ds hash input log lunar_rescue_game_state)
 target_link_libraries(${PROJECT_NAME} ds hash input log sprite lunar_rescue_game_state)
 
 target_include_directories(
