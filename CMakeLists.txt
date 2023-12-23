@@ -28,42 +28,48 @@ CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.8.0")
 CPMAddPackage(
 	NAME ds
 	GITHUB_REPOSITORY shoejunk/ds
-	VERSION 2.1.1
+	#VERSION 2.1.1
+	GIT_TAG main
 )
 
 # Add package: shoejunk/hash
 CPMAddPackage(
 	NAME hash
 	GITHUB_REPOSITORY shoejunk/hash
-	VERSION 6.0.1
+	#VERSION 6.0.1
+	GIT_TAG main
 )
 
 # Add package: shoejunk/input
 CPMAddPackage(
 	NAME input
 	GITHUB_REPOSITORY shoejunk/input
-	VERSION 1.10.0
+	#VERSION 1.10.0
+	GIT_TAG main
 )
 
 # Add package: shoejunk/log
 CPMAddPackage(
 	NAME log
 	GITHUB_REPOSITORY shoejunk/log
-	VERSION 1.3.0
+	#VERSION 1.3.0
+	GIT_TAG main
 )
 
 # Add package: shoejunk/sprite
 CPMAddPackage(
 	NAME sprite
 	GITHUB_REPOSITORY shoejunk/sprite
-	VERSION 0.1.2
+	#VERSION 0.1.2
+	GIT_TAG main
 )
 
 # Add package: shoejunk/lunar_rescue_game_state
 CPMAddPackage(
 	NAME lunar_rescue_game_state
 	GITHUB_REPOSITORY shoejunk/lunar-rescue-game-state
-	VERSION 0.19.0
+	#VERSION 0.19.0
+	GIT_TAG main
 )
 
 # ---- Add source files ----

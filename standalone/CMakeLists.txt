@@ -27,14 +27,16 @@ CPMAddPackage(NAME lunar_rescue_game SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 CPMAddPackage(
 	NAME hash
 	GITHUB_REPOSITORY shoejunk/hash
-	VERSION 6.0.1
+	#VERSION 6.0.1
+	GIT_TAG main
 )
 
 # Add package: shoejunk/collide
 CPMAddPackage(
 	NAME collide
 	GITHUB_REPOSITORY shoejunk/collide
-	VERSION 0.1.1
+	#VERSION 0.1.1
+	GIT_TAG main
 )
 
 # ---- Create standalone executable ----
