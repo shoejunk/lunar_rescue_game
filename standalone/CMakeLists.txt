@@ -23,6 +23,14 @@ CPMAddPackage(
 
 CPMAddPackage(NAME lunar_rescue_game SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
+# Add package: shoejunk/collide
+CPMAddPackage(
+	NAME collide
+	GITHUB_REPOSITORY shoejunk/collide
+	#VERSION 0.1.1
+	GIT_TAG main
+)
+
 # Add package: shoejunk/hash
 CPMAddPackage(
 	NAME hash
@@ -31,11 +39,11 @@ CPMAddPackage(
 	GIT_TAG main
 )
 
-# Add package: shoejunk/collide
+# Add package: shoejunk/log
 CPMAddPackage(
-	NAME collide
-	GITHUB_REPOSITORY shoejunk/collide
-	#VERSION 0.1.1
+	NAME log
+	GITHUB_REPOSITORY shoejunk/log
+	#VERSION X.X.X
 	GIT_TAG main
 )
 

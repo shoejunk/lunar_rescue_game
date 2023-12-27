@@ -100,6 +100,11 @@ namespace lunar_rescue
 			return m_state;
 		}
 
+		c_game_state& state()
+		{
+			return m_state;
+		}
+
 		c_sprite_bank& sprites()
 		{
 			return m_sprites;
