@@ -17,6 +17,7 @@ int main()
 
 	// Set up the sprites.
 	sf::Sprite* rocket_sprite = game.sprites().make_sprite("rocket"_h, "data/rocket_small.png", 0.f, 0.f);
+	sf::Sprite* rocket_collision_sprite = game.sprites().make_sprite("rocket_collision"_h, "data/rocket_small.png", 0.f, 0.f);
 	sf::Sprite* block_sprite = game.sprites().make_sprite("block"_h, "data/block_small.jpg", 64.f, 64.f);
 	if (rocket_sprite == nullptr)
 	{

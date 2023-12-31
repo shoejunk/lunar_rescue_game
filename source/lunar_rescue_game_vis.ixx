@@ -33,6 +33,17 @@ namespace lunar_rescue
 				sprite->setRotation(rocket.rot_rad() * 360.f / (2.f * numbers::pi_v<float>));
 			}
 
+			sf::Sprite* col_sprite = m_sprites.get("rocket_collision"_h);
+			if (col_sprite != nullptr)
+			{
+				rocket.collision_mask().to_image(m_col_image);
+				m_col_texture.loadFromImage(m_col_image);
+				col_sprite->setTexture(m_col_texture, true);
+				col_sprite->setOrigin(sf::Vector2f(m_col_texture.getSize()) / 2.f);
+				col_sprite->setOrigin(sf::Vector2f(col_sprite->getTexture()->getSize()) / 2.f);
+				col_sprite->setPosition(rocket.screen_pos().x(), rocket.screen_pos().y());
+			}
+
 			auto bullets = m_state.bullets();
 			for (auto const& bullet : bullets)
 			{
@@ -58,5 +69,7 @@ namespace lunar_rescue
 	private:
 		c_game_state const& m_state;
 		c_sprite_bank& m_sprites;
+		sf::Image m_col_image;
+		sf::Texture m_col_texture;
 	};
 }
