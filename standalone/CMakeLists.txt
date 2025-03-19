@@ -47,6 +47,14 @@ CPMAddPackage(
 	GIT_TAG main
 )
 
+# Add package: shoejunk/reflect
+CPMAddPackage(
+	NAME reflect
+	GITHUB_REPOSITORY shoejunk/reflect
+	#VERSION X.X.X
+	GIT_TAG main
+)
+
 # ---- Create standalone executable ----
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
@@ -55,5 +63,5 @@ add_executable(${PROJECT_NAME} ${sources})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23 OUTPUT_NAME "lunar_rescue_game")
 
-target_link_libraries(${PROJECT_NAME} lunar_rescue_game cxxopts hash collide)
+target_link_libraries(${PROJECT_NAME} lunar_rescue_game cxxopts hash collide log reflect)
 file(COPY data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

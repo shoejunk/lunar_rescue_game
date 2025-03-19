@@ -11,15 +11,23 @@ import <SFML/Graphics.hpp>;
 using namespace std;
 using namespace stk;
 
+constexpr int32_t units_per_pixel = 8192;
+
 namespace lunar_rescue
 {
 	export class c_game_vis
 	{
 	public:
-		c_game_vis(c_game_state const& state, c_sprite_bank& sprites)
-			: m_state(state)
+		c_game_vis(sf::RenderWindow const& window, c_game_state const& state, c_sprite_bank& sprites)
+			: m_window(window)
+			, m_state(state)
 			, m_sprites(sprites)
 		{
+		}
+
+		sf::Vector2f screen_pos(c_vec2i pos) const
+		{
+			return sf::Vector2f(pos.x() / units_per_pixel, -pos.y() / units_per_pixel);
 		}
 
 		void update()
@@ -44,15 +52,26 @@ namespace lunar_rescue
 				col_sprite->setPosition(rocket.screen_pos().x(), rocket.screen_pos().y());
 			}
 
+			sf::Sprite* block_col_sprite = m_sprites.get("block_collision"_h);
+			if (block_col_sprite != nullptr)
+			{
+				c_block const& block = m_state.block();
+				block.collision_mask().to_image(m_block_col_image);
+				m_block_col_texture.loadFromImage(m_block_col_image);
+				block_col_sprite->setTexture(m_block_col_texture, true);
+				block_col_sprite->setOrigin(sf::Vector2f(m_block_col_texture.getSize()) / 2.f);
+				block_col_sprite->setOrigin(sf::Vector2f(block_col_sprite->getTexture()->getSize()) / 2.f);
+				block_col_sprite->setPosition(block.screen_pos().x(), block.screen_pos().y());
+			}
+
 			auto bullets = m_state.bullets();
 			for (auto const& bullet : bullets)
 			{
 				sf::Sprite* sprite = m_sprites.get(bullet.id());
 				if (sprite == nullptr)
 				{
-					float x = bullet.screen_pos().x();
-					float y = bullet.screen_pos().y();
-					sprite = m_sprites.make_sprite(bullet.id(), "data/laser.png", x, y);
+					auto bullet_screen_pos = screen_pos(bullet.pos());
+					sprite = m_sprites.make_sprite(bullet.id(), "data/laser.png", bullet_screen_pos.x, bullet_screen_pos.y);
 					if (sprite != nullptr)
 					{
 						sprite->setOrigin(sf::Vector2f(sprite->getTexture()->getSize()) / 2.f);
@@ -60,16 +79,19 @@ namespace lunar_rescue
 				}
 				if (sprite != nullptr)
 				{
-					sprite->setPosition(bullet.screen_pos().x(), bullet.screen_pos().y());
+					sprite->setPosition(screen_pos(bullet.pos()));
 					sprite->setRotation(bullet.rot_deg());
 				}
 			}
 		}
 
 	private:
+		sf::RenderWindow const& m_window;
 		c_game_state const& m_state;
 		c_sprite_bank& m_sprites;
 		sf::Image m_col_image;
 		sf::Texture m_col_texture;
+		sf::Image m_block_col_image;
+		sf::Texture m_block_col_texture;
 	};
 }

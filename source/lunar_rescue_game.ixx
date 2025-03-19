@@ -29,7 +29,7 @@ namespace lunar_rescue
 	public:
 		c_game(uint32_t x, uint32_t y, char const* title)
 			: m_window(sf::VideoMode(x, y), title)
-			, m_vis(m_state, m_sprites)
+			, m_vis(m_window, m_state, m_sprites)
 			, m_update_count(0)
 		{
 			m_game_input.add(sf::Keyboard::Key::A, "left"_h);
